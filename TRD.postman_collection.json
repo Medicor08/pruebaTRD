@@ -1,0 +1,503 @@
+{
+	"info": {
+		"_postman_id": "cd7ac45c-8058-4d11-90e8-b4e6225d102d",
+		"name": "TRD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32287006"
+	},
+	"item": [
+		{
+			"name": "1.- Users",
+			"item": [
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"itza\",\r\n    \"email\":\"i@hotmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuarios",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2.- Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"authToken\", jsonData.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"i@hotmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3.- Tasks",
+			"item": [
+				{
+					"name": "Crear tarea",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_usuario\":\"67d3202b48e317875fdf2e60\",\r\n    \"titulo\":\"documentar\",\r\n    \"descripcion\":\"documentar servicios\",\r\n    \"fecha_limite\":\"03/13/2025\",\r\n    \"estado\":\"PENDIENTE\",\r\n    \"categoria\":\"TRABAJO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/tareas?id_usuario=67d3202b48e317875fdf2e60",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tareas"
+							],
+							"query": [
+								{
+									"key": "id_usuario",
+									"value": "67d3202b48e317875fdf2e60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar tareas usuario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/tareas?id_usuario=67d3202b48e317875fdf2e60",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tareas"
+							],
+							"query": [
+								{
+									"key": "id_usuario",
+									"value": "67d3202b48e317875fdf2e60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detalle tarea",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/tareas/detalle/?id_tarea=67d3419f80c3a46055375016&id_usuario=67d3202b48e317875fdf2e60",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tareas",
+								"detalle",
+								""
+							],
+							"query": [
+								{
+									"key": "id_tarea",
+									"value": "67d3419f80c3a46055375016"
+								},
+								{
+									"key": "id_usuario",
+									"value": "67d3202b48e317875fdf2e60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar tarea",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"Cenar3\",\r\n    \"descripcion\":\"Leche con pan\",\r\n    \"fecha_limite\":\"03/12/2025\",\r\n    \"estado\":\"COMPLETADA\",\r\n    \"categoria\":\"PERSONAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/tareas?id_tarea=67d33de877ad96c4e9bdeddf&id_usuario=67d3202b48e317875fdf2e60",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tareas"
+							],
+							"query": [
+								{
+									"key": "id_tarea",
+									"value": "67d33de877ad96c4e9bdeddf"
+								},
+								{
+									"key": "id_usuario",
+									"value": "67d3202b48e317875fdf2e60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar tarea",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/tareas?id_tarea=67d33de877ad96c4e9bdeddf&id_usuario=67d3202b48e317875fdf2e60",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tareas"
+							],
+							"query": [
+								{
+									"key": "id_tarea",
+									"value": "67d33de877ad96c4e9bdeddf"
+								},
+								{
+									"key": "id_usuario",
+									"value": "67d3202b48e317875fdf2e60"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4.- Files",
+			"item": [
+				{
+					"name": "Añadir archivo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "archivo",
+									"type": "file",
+									"src": "/C:/Users/migue/Documents/Documentos GRUPO GALVAN/AWS Certified Cloud Practitioner certificate-MiguelCordero.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/archivos?id_tarea=67d3419f80c3a46055375016&id_usuario=67d3202b48e317875fdf2e60",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"archivos"
+							],
+							"query": [
+								{
+									"key": "id_tarea",
+									"value": "67d3419f80c3a46055375016"
+								},
+								{
+									"key": "id_usuario",
+									"value": "67d3202b48e317875fdf2e60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Descargar archivo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/archivos?id_archivo=67d3490527a9aec25af4a18c&id_tarea=67d3419f80c3a46055375016&id_usuario=67d3202b48e317875fdf2e60",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"archivos"
+							],
+							"query": [
+								{
+									"key": "id_archivo",
+									"value": "67d3490527a9aec25af4a18c"
+								},
+								{
+									"key": "id_tarea",
+									"value": "67d3419f80c3a46055375016"
+								},
+								{
+									"key": "id_usuario",
+									"value": "67d3202b48e317875fdf2e60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar archivo",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/archivos?id_archivo=67d3490527a9aec25af4a18c&id_tarea=67d3419f80c3a46055375016&id_usuario=67d3202b48e317875fdf2e60",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"archivos"
+							],
+							"query": [
+								{
+									"key": "id_archivo",
+									"value": "67d3490527a9aec25af4a18c"
+								},
+								{
+									"key": "id_tarea",
+									"value": "67d3419f80c3a46055375016"
+								},
+								{
+									"key": "id_usuario",
+									"value": "67d3202b48e317875fdf2e60"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5.- Filters",
+			"item": [
+				{
+					"name": "Por estado",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/tareas/filtradas-estado?filtro=COMPLETADA&id_usuario=67d3202b48e317875fdf2e60",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tareas",
+								"filtradas-estado"
+							],
+							"query": [
+								{
+									"key": "filtro",
+									"value": "COMPLETADA"
+								},
+								{
+									"key": "id_usuario",
+									"value": "67d3202b48e317875fdf2e60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Por categoría",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/tareas/filtradas-categoria?filtro=TRABAJO&id_usuario=67d3202b48e317875fdf2e60",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tareas",
+								"filtradas-categoria"
+							],
+							"query": [
+								{
+									"key": "filtro",
+									"value": "TRABAJO"
+								},
+								{
+									"key": "id_usuario",
+									"value": "67d3202b48e317875fdf2e60"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "authToken",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
