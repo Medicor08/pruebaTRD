@@ -44,7 +44,7 @@ export async function download_file(req, res) {
 
         const file = await db.collection('archivos').findOne({ _id: ObjectId.createFromHexString(req.query.id_archivo) });
 
-        res.setHeader('Content-Disposition', `attachment; filename="${file.nombre_archivo}"`);
+        res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(file.nombre_archivo)}"`);
         res.setHeader('Content-Type', file.tipo_archivo);
         res.setHeader('Content-Length', file.archivo.buffer.length);
         res.send(file.archivo.buffer);

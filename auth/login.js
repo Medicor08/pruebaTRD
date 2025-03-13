@@ -1,5 +1,4 @@
 import { Mongoclient } from '../utils/mongodb_connection.js';
-import { sql } from '../utils/postgresql_connection.js'
 import jwt from 'jsonwebtoken';
 import { comparePassword } from '../utils/compare_pass.js';
 import { login_schema } from '../utils/schemas.js';
