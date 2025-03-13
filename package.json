@@ -1,0 +1,33 @@
+{
+  "name": "prueba-tecnica-trd",
+  "version": "1.0.0",
+  "description": "Prueba tecnica desarrollador backend junior",
+  "homepage": "https://github.com/Medicor08/pruebaTRD#readme",
+  "bugs": {
+    "url": "https://github.com/Medicor08/pruebaTRD/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Medicor08/pruebaTRD.git"
+  },
+  "license": "ISC",
+  "author": "Miguel Angel Medina Cordero",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.14.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
